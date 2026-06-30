@@ -10,6 +10,11 @@ export default async function SearchPage({
 }) {
   const { q = "" } = await searchParams;
   const results = searchSnippets(q);
+  results.sort((a, b) => {
+    const aFeatured = a.featured ? 1 : 0;
+    const bFeatured = b.featured ? 1 : 0;
+    return bFeatured - aFeatured;
+  });
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-6 py-12">

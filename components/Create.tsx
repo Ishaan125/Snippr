@@ -13,10 +13,13 @@ export function CreateSnippet() {
       title: String(formData.get("title") || "").trim(),
       description: String(formData.get("description") || "").trim(),
       code: String(formData.get("code") || "").trim(),
+      language: String(formData.get("language") || "").trim(),
       hashtags: String(formData.get("hashtags") || "")
         .split(",")
         .map((tag) => tag.trim())
         .filter(Boolean),
+      featured: false,
+      verified: false,
     };
 
     const response = await fetch("/api/snippets", {
@@ -53,6 +56,12 @@ export function CreateSnippet() {
         required
         rows={6}
         className="w-full rounded border border-zinc-300 bg-white px-4 py-2 font-mono text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
+      />
+      <input
+        name="language"
+        placeholder="Language"
+        required
+        className="w-full rounded border border-zinc-300 bg-white px-4 py-2 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
       />
       <input
         name="hashtags"

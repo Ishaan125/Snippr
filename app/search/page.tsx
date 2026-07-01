@@ -3,13 +3,9 @@ import { SearchBar } from "@/components/SearchBar";
 import { SnippetCard } from "@/components/SnippetCard";
 import { searchSnippets } from "@/lib/snippets";
 
-export default async function SearchPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
+export default async function SearchPage({searchParams,}: {searchParams: Promise<{ q?: string }>;}) {
   const { q = "" } = await searchParams;
-  const results = searchSnippets(q);
+  const results = await searchSnippets(q);
   results.sort((a, b) => {
     const aFeatured = a.featured ? 1 : 0;
     const bFeatured = b.featured ? 1 : 0;

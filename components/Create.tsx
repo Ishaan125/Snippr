@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export function CreateSnippet() {
   const [status, setStatus] = useState<string | null>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
     const payload = {
       title: String(formData.get("title") || "").trim(),
@@ -29,14 +31,15 @@ export function CreateSnippet() {
     });
 
     const result = await response.json();
-    setStatus(result.success ? "Snippet created successfully." : result.error || "Something went wrong.");
+    setStatus(result.success ? "Snippet created successfully. Your snippet will be reviewed before being published." : result.error || "Something went wrong.");
     if (result.success) {
-      event.currentTarget.reset();
+      form.reset();
+      formRef.current?.reset();
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
       <input
         name="title"
         placeholder="Title"

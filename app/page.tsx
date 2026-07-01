@@ -4,8 +4,8 @@ import { SnippetCard } from "@/components/SnippetCard";
 import { CreateSnippet } from "@/components/Create";
 import { getPopularSnippets } from "@/lib/snippets";
 
-export default function Home() {
-  const popularSnippets = getPopularSnippets();
+export default async function Home() {
+  const popularSnippets = await getPopularSnippets();
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-10 px-6 py-12">

@@ -2,11 +2,7 @@ import { NextResponse } from "next/server";
 import { getSupabaseClient } from "@/lib/supabase";
 
 function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+  return value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
 export async function POST(request: Request) {
@@ -18,9 +14,7 @@ export async function POST(request: Request) {
     const language = String(body?.language || "").trim();
     const featured = Boolean(body?.featured);
     const verified = Boolean(body?.verified);
-    const hashtags = Array.isArray(body?.hashtags)
-      ? body.hashtags.filter((tag: unknown) => typeof tag === "string")
-      : [];
+    const hashtags = Array.isArray(body?.hashtags) ? body.hashtags : [];
 
     if (!title || !description || !code || !language) {
       return NextResponse.json(
@@ -30,30 +24,33 @@ export async function POST(request: Request) {
     }
 
     const supabase = getSupabaseClient();
-    const tableName = process.env.SNIPPETS_TABLE || process.env.NEXT_PUBLIC_SNIPPETS_TABLE || "Snippets";
     const slug = `${slugify(title)}-${Date.now().toString(36)}`;
-
-    const { error } = await supabase.from(tableName).insert({
-      slug,
-      title,
-      description,
-      code,
-      language,
-      featured,
-      verified,
-      hashtags,
-    });
+    const { error } = await supabase.from("Snippets").insert({slug,title,description,code,language,featured,verified,hashtags});
 
     if (error) {
-      const message = error.message.includes("Could not find the table")
-        ? `Supabase table "${tableName}" was not found. Create it in Supabase or set the SNIPPETS_TABLE environment variable to the correct table name.`
-        : error.message;
-
-      return NextResponse.json({ success: false, error: message }, { status: 500 });
+      return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
-
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } 
+  catch (error) {
+    return NextResponse.json(
+      { success: false, error: error instanceof Error ? error.message : "Unknown error", hint: (error as any).hint ?? null },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase.from("Snippets").select("*").order("id", { ascending: false }).eq("verified", true).limit(100);
+
+    if (error) {
+      return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    }
+    return NextResponse.json({ success: true, data: data ?? [] });
+  }
+  catch (error) {
     return NextResponse.json(
       { success: false, error: error instanceof Error ? error.message : "Unknown error", hint: (error as any).hint ?? null },
       { status: 500 }

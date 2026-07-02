@@ -18,7 +18,7 @@ export default async function Home() {
             Discover the snippets that power your next build.
           </h1>
           <p className="text-lg leading-8 text-zinc-600">
-            Explore popular code examples, search by language or tag, and jump into the snippets that matter most.
+            Explore popular code examples, search by language or description, and jump into the snippets that matter most.
           </p>
         </div>
 

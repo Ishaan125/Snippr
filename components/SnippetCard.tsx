@@ -12,7 +12,7 @@ export function SnippetCard({ snippet }: { snippet: Snippet }) {
           <h3 className="mt-1 text-lg font-semibold text-zinc-900">{snippet.title}</h3>
         </div>
         {snippet.featured ? (
-          <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700">
+          <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700 ">
             Popular
           </span>
         ) : null}
@@ -23,18 +23,6 @@ export function SnippetCard({ snippet }: { snippet: Snippet }) {
       <pre className="mt-4 overflow-x-auto rounded-xl bg-zinc-950 p-4 text-sm text-zinc-100">
         <code>{snippet.code}</code>
       </pre>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        {snippet.tags.map((tag) => {
-          const normalizedTag = tag.startsWith("#") ? tag : `#${tag}`;
-
-          return (
-            <span key={tag} className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700">
-              {normalizedTag}
-            </span>
-          );
-        })}
-      </div>
 
       <Link
         href={`/snippets/${snippet.slug}`}

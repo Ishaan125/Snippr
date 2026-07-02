@@ -4,7 +4,6 @@ export interface Snippet {
   title: string;
   description: string;
   language: string;
-  tags: string[];
   code: string;
   featured?: boolean;
 }

@@ -12,7 +12,6 @@ async function getSnippetRecords(): Promise<Snippet[]> {
     title: String(record.title ?? ""),
     description: String(record.description ?? ""),
     language: String(record.language ?? ""),
-    tags: record.tags && Array.isArray(record.tags) ? record.tags : [],
     code: String(record.code ?? ""),
     featured: Boolean(record.featured ?? false),
   }))
@@ -33,7 +32,7 @@ export async function searchSnippets(query: string) {
   }
 
   return snippets.filter((snippet) => {
-    const haystack = [snippet.title, snippet.description, snippet.language, ...snippet.tags, snippet.code]
+    const haystack = [snippet.title, snippet.description, snippet.language, snippet.code]
       .join(" ").toLowerCase();
     return haystack.includes(normalizedQuery);
   });

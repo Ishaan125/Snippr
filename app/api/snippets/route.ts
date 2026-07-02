@@ -14,7 +14,6 @@ export async function POST(request: Request) {
     const language = String(body?.language || "").trim();
     const featured = Boolean(body?.featured);
     const verified = Boolean(body?.verified);
-    const tags = Array.isArray(body?.tags) ? body.tags : [];
 
     if (!title || !description || !code || !language) {
       return NextResponse.json(
@@ -25,7 +24,7 @@ export async function POST(request: Request) {
 
     const supabase = getSupabaseClient();
     const slug = `${slugify(title)}-${Date.now().toString(36)}`;
-    const { error } = await supabase.from("Snippets").insert({slug,title,description,code,language,featured,verified,tags});
+    const { error } = await supabase.from("Snippets").insert({slug,title,description,code,language,featured,verified});
 
     if (error) {
       return NextResponse.json({ success: false, error: error.message }, { status: 500 });

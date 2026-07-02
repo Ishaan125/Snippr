@@ -16,11 +16,6 @@ export function CreateSnippet() {
       description: String(formData.get("description") || "").trim(),
       code: String(formData.get("code") || "").trim(),
       language: String(formData.get("language") || "").trim(),
-      tags: String(formData.get("tags") || "")
-        .split(",")
-        .map((tag) => tag.trim().replace(/^#/, ""))
-        .filter(Boolean)
-        .map((tag) => `#${tag}`),
       featured: false,
       verified: false,
     };
@@ -45,32 +40,27 @@ export function CreateSnippet() {
         name="title"
         placeholder="Title"
         required
-        className="w-full rounded border border-zinc-300 bg-white px-4 py-2 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
+        className="w-full rounded border text-zinc-900 border-zinc-300 bg-white px-4 py-2 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
       />
       <textarea
         name="description"
         placeholder="Description"
         required
         rows={4}
-        className="w-full rounded border border-zinc-300 bg-white px-4 py-2 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
+        className="w-full rounded border text-zinc-900 border-zinc-300 bg-white px-4 py-2 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
       />
       <textarea
         name="code"
         placeholder="Code"
         required
         rows={6}
-        className="w-full rounded border border-zinc-300 bg-white px-4 py-2 font-mono text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
+        className="w-full rounded border text-zinc-900 border-zinc-300 bg-white px-4 py-2 font-mono text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
       />
       <input
         name="language"
         placeholder="Language"
         required
-        className="w-full rounded border border-zinc-300 bg-white px-4 py-2 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
-      />
-      <input
-        name="hashtags"
-        placeholder="Hashtags (comma-separated, e.g. #react, #nextjs)"
-        className="w-full rounded border border-zinc-300 bg-white px-4 py-2 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
+        className="w-full rounded border text-zinc-900 border-zinc-300 bg-white px-4 py-2 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
       />
       <button
         type="submit"

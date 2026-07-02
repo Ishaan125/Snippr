@@ -4,8 +4,8 @@ export function SearchBar({ initialQuery = "" }: { initialQuery?: string }) {
       <input
         name="q"
         defaultValue={initialQuery}
-        placeholder="Search snippets, languages, or tags"
-        className="w-full rounded-full border border-zinc-300 bg-white px-4 py-3 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
+        placeholder="Search snippets, languages, or by description"
+        className="w-full rounded-full border text-zinc-900 border-zinc-300 bg-white px-4 py-3 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
       />
       <button
         type="submit"

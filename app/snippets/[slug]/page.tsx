@@ -21,7 +21,7 @@ export default async function SnippetDetailPage({params,}: {params: Promise<{ sl
             {snippet.language}
           </p>
           {snippet.featured ? (
-            <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700">
+            <span className="ml-auto rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700">
               Popular
             </span>
           ) : null}
@@ -34,14 +34,6 @@ export default async function SnippetDetailPage({params,}: {params: Promise<{ sl
         <pre className="mt-6 overflow-x-auto rounded-2xl bg-zinc-950 p-6 text-sm text-zinc-100">
           <code>{snippet.code}</code>
         </pre>
-
-        <div className="mt-6 flex flex-wrap gap-2">
-          {snippet.tags.map((tag) => (
-            <span key={tag} className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700">
-              #{tag}
-            </span>
-          ))}
-        </div>
       </section>
     </main>
   );

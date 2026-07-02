@@ -15,14 +15,19 @@ export default async function SearchPage({searchParams,}: {searchParams: Promise
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-6 py-12">
       <div className="flex flex-col gap-6">
-        <div>
+        <div className="flex items-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">
             Search results
           </p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-950">
-            Find snippets that fit your project
-          </h1>
+          <Link
+            href="/"
+            className="ml-auto text-sm font-medium text-zinc-700 underline underline-offset-4">
+            Back home
+          </Link>
         </div>
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight">
+          Find snippets that fit your project
+        </h1>
         <SearchBar initialQuery={q} />
       </div>
 
@@ -35,9 +40,10 @@ export default async function SearchPage({searchParams,}: {searchParams: Promise
           </div>
         )}
       </section>
-
-      <Link href="/" className="text-sm font-medium text-zinc-700 underline underline-offset-4">
-        Back home
+      <Link
+            href="/"
+            className="text-sm font-medium text-zinc-700 underline underline-offset-4">
+            Back home
       </Link>
     </main>
   );

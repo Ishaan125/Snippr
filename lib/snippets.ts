@@ -12,9 +12,9 @@ async function getSnippetRecords(): Promise<Snippet[]> {
     title: String(record.title ?? ""),
     description: String(record.description ?? ""),
     language: String(record.language ?? ""),
-    tags: record.hashtags && Array.isArray(record.hashtags) ? record.hashtags.map(String) : [],
+    tags: record.tags && Array.isArray(record.tags) ? record.tags : [],
     code: String(record.code ?? ""),
-    featured: Boolean(record.featured),
+    featured: Boolean(record.featured ?? false),
   }))
   .filter((snippet) => snippet.slug && snippet.title && snippet.code);
 }

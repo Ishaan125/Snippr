@@ -26,18 +26,6 @@ export default async function Home() {
       </section>
 
       <section className="space-y-6">
-        <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-6">
-          <div className="mb-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              Create snippet
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-zinc-950">
-              Share a new snippet with the community
-            </h2>
-          </div>
-          <CreateSnippet />
-        </div>
-
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
@@ -56,6 +44,18 @@ export default async function Home() {
           {popularSnippets.map((snippet) => (
             <SnippetCard key={snippet.id} snippet={snippet} />
           ))}
+        </div>
+
+        <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-6">
+          <div className="mb-4">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
+              Create snippet
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold text-zinc-950">
+              Share a new snippet with the community
+            </h2>
+          </div>
+          <CreateSnippet />
         </div>
       </section>
     </main>

@@ -16,10 +16,11 @@ export function CreateSnippet() {
       description: String(formData.get("description") || "").trim(),
       code: String(formData.get("code") || "").trim(),
       language: String(formData.get("language") || "").trim(),
-      hashtags: String(formData.get("hashtags") || "")
+      tags: String(formData.get("tags") || "")
         .split(",")
-        .map((tag) => tag.trim())
-        .filter(Boolean),
+        .map((tag) => tag.trim().replace(/^#/, ""))
+        .filter(Boolean)
+        .map((tag) => `#${tag}`),
       featured: false,
       verified: false,
     };
@@ -68,7 +69,7 @@ export function CreateSnippet() {
       />
       <input
         name="hashtags"
-        placeholder="Hashtags (comma-separated)"
+        placeholder="Hashtags (comma-separated, e.g. #react, #nextjs)"
         className="w-full rounded border border-zinc-300 bg-white px-4 py-2 text-sm shadow-sm outline-none ring-0 transition focus:border-zinc-900"
       />
       <button

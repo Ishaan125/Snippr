@@ -25,11 +25,15 @@ export function SnippetCard({ snippet }: { snippet: Snippet }) {
       </pre>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        {snippet.tags.map((tag) => (
-          <span key={tag} className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700">
-            #{tag}
-          </span>
-        ))}
+        {snippet.tags.map((tag) => {
+          const normalizedTag = tag.startsWith("#") ? tag : `#${tag}`;
+
+          return (
+            <span key={tag} className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700">
+              {normalizedTag}
+            </span>
+          );
+        })}
       </div>
 
       <Link

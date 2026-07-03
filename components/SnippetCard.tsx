@@ -1,35 +1,55 @@
 import Link from "next/link";
 import type { Snippet } from "@/types/snippet";
+import { highlightCode } from "@/lib/highlight";
 
-export function SnippetCard({ snippet }: { snippet: Snippet }) {
+export async function SnippetCard({ snippet }: { snippet: Snippet }) {
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-      <div className="flex items-center justify-between gap-3">
+    <article
+      className="group flex h-full flex-col rounded-3xl border border-zinc-800 bg-zinc-900/80 p-6 
+      shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-zinc-700 hover:shadow-2xl">
+      
+      <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+          <span className="inline-flex rounded-full bg-zinc-800 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-300">
             {snippet.language}
-          </p>
-          <h3 className="mt-1 text-lg font-semibold text-zinc-900">{snippet.title}</h3>
-        </div>
-        {snippet.featured ? (
-          <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700 ">
-            Popular
           </span>
-        ) : null}
+
+          <h3 className="mt-3 text-xl font-semibold tracking-tight text-white">
+            {snippet.title}
+          </h3>
+        </div>
+
+        {snippet.featured && (
+          <span className="rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs font-medium text-violet-300">
+            ★ Popular
+          </span>
+        )}
       </div>
 
-      <p className="mt-4 text-sm leading-6 text-zinc-600">{snippet.description}</p>
+      <p className="mt-4 text-sm leading-6 text-zinc-400">
+        {snippet.description}
+      </p>
 
-      <pre className="mt-4 overflow-x-auto rounded-xl bg-zinc-950 p-4 text-sm text-zinc-100">
-        <code>{snippet.code}</code>
-      </pre>
-
-      <Link
-        href={`/snippets/${snippet.slug}`}
-        className="mt-6 inline-flex text-sm font-medium text-zinc-950 underline underline-offset-4"
-      >
-        View snippet
-      </Link>
+      <div
+        className="
+          mt-5 overflow-hidden rounded-2xl border border-zinc-800 bg-[#0b0b0b] [&_pre]:m-0
+          [&_pre]:bg-transparent!important [&_pre]:p-5 [&_pre]:text-[13px] [&_pre]:leading-6"
+        dangerouslySetInnerHTML={{
+          __html: await highlightCode(snippet.code, snippet.language),
+        }}
+      />
+      <div className="mt-6 flex items-center justify-between">
+        <Link
+          href={`/snippets/${snippet.slug}`}
+          className="inline-flex items-center gap-2 text-sm font-medium
+            text-zinc-200 transition-colors group-hover:text-white"
+          >
+          View snippet
+          <span className="transition-transform group-hover:translate-x-1">
+            →
+          </span>
+        </Link>
+      </div>
     </article>
   );
 }

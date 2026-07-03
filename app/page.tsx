@@ -3,60 +3,107 @@ import { SearchBar } from "@/components/SearchBar";
 import { SnippetCard } from "@/components/SnippetCard";
 import { CreateSnippet } from "@/components/Create";
 import { getPopularSnippets } from "@/lib/snippets";
+import { Sparkles } from "lucide-react";
 
 export default async function Home() {
   const popularSnippets = await getPopularSnippets();
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-10 px-6 py-12">
-      <section className="flex flex-col gap-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
-        <div className="max-w-2xl space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-            Snippr
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 sm:text-5xl">
-            Discover the snippets that power your next build.
-          </h1>
-          <p className="text-lg leading-8 text-zinc-600">
-            Explore popular code examples, search by language or description, and jump into the snippets that matter most.
-          </p>
-        </div>
+    <main className="min-h-screen bg-[#111113] bg-gradient-to-b from-[#111113] to-[#0b0b0f]">
+      <section className="mx-auto max-w-7xl px-6 pt-6">
+        <div className="overflow-hidden rounded-[36px] border border-zinc-200 bg-white shadow-xl">
+          <header className="flex items-center justify-between px-10 py-8">
+            <Link
+              href="/"
+              className="text-lg font-bold tracking-[0.35em] text-zinc-900"
+            >
+              SNIPPR
+            </Link>
 
-        <SearchBar />
+            <Link
+              href="/search"
+              className="text-sm font-medium text-zinc-700 transition hover:text-black"
+            >
+              Browse all snippets →
+            </Link>
+          </header>
+
+          <div className="relative px-10 pb-24 pt-6">
+            <div className="absolute right-0 top-0 h-full w-80 opacity-40">
+              <div className="h-full w-full bg-[radial-gradient(#c4b5fd_1px,transparent_1px)] [background-size:18px_18px]" />
+            </div>
+
+            <div className="relative max-w-3xl">
+              <span className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-violet-50 px-4 py-1.5 text-sm font-semibold text-violet-800">
+                <Sparkles className="h-3.5 w-3.5 text-violet-600" />
+                <span className="text-violet-800">Find. Learn. Build.</span>
+              </span>
+
+              <h1 className="mt-8 text-6xl font-bold leading-tight tracking-tight text-zinc-950">
+                <br />Discover the snippets that power your next build.
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-xl leading-9 text-zinc-600">
+                Explore popular code examples, search by language or
+                description, and jump into the snippets that matter most.
+              </p>
+
+              <div className="mt-10">
+                <SearchBar />
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="space-y-6">
-        <div className="flex items-center justify-between gap-4">
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-10 flex items-end justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              Popular now
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-zinc-950">
-              Trending snippets
-            </h2>
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">🔥</span>
+              <h2 className="text-4xl font-bold text-white">
+                Popular snippets
+              </h2>
+            </div>
           </div>
-          <Link href="/search" className="text-sm font-medium text-zinc-700 underline underline-offset-4">
-            Browse all
+
+          <Link
+            href="/search"
+            className="rounded-xl border border-zinc-700 px-5 py-3 text-sm font-medium text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800"
+          >
+            Browse all snippets →
           </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {popularSnippets.map((snippet) => (
-            <SnippetCard key={snippet.id} snippet={snippet} />
+            <SnippetCard
+              key={snippet.id}
+              snippet={snippet}
+            />
           ))}
         </div>
 
-        <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-6">
-          <div className="mb-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-zinc-500">
-              Create snippet
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-zinc-950">
-              Share a new snippet with the community
-            </h2>
+        <div className="mt-16 rounded-3xl border border-zinc-800 bg-zinc-900 p-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-5">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-zinc-800 text-2xl">
+                ✨
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-white">
+                  Have a useful snippet?
+                </h3>
+                <p className="mt-1 text-zinc-400">
+                  Share it with the community and help others ship faster.
+                </p>
+              </div>
+            </div>
+
+            <CreateSnippet />
           </div>
-          <CreateSnippet />
         </div>
+
       </section>
     </main>
   );

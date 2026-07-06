@@ -42,7 +42,7 @@ export async function POST(request: Request) {
 export async function GET() {
   try {
     const supabase = getSupabaseClient();
-    const { data, error } = await supabase.from("Snippets").select("*").order("id", { ascending: false }).eq("verified", true).limit(100);
+    const { data, error } = await supabase.from("Snippets").select("*").order("id", { ascending: false }).eq("verified", true);
 
     if (error) {
       return NextResponse.json({ success: false, error: error.message }, { status: 500 });

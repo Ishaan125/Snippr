@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSnippetBySlug } from "@/lib/snippets";
 import { highlightCode } from "@/lib/highlight";
+import { getLanguageColor } from "@/lib/highlight";
 
 export default async function SnippetDetailPage({params,}: {params: Promise<{ slug: string }>;}) {
   const { slug } = await params;
@@ -24,7 +25,7 @@ export default async function SnippetDetailPage({params,}: {params: Promise<{ sl
         <article className="rounded-[32px] border border-zinc-800 bg-zinc-900/80 p-8 shadow-2xl">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <span className="inline-flex rounded-full bg-zinc-800 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-300">
+              <span className={`text-xs font-semibold uppercase tracking-[0.2em] ${getLanguageColor(snippet.language)}`}>
                 {snippet.language}
               </span>
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-white">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Snippet } from "@/types/snippet";
 import { highlightCode } from "@/lib/highlight";
+import { getLanguageColor } from "@/lib/highlight";
 
 export async function SnippetCard({ snippet }: { snippet: Snippet }) {
   return (
@@ -10,7 +11,7 @@ export async function SnippetCard({ snippet }: { snippet: Snippet }) {
       
       <div className="flex items-start justify-between gap-4">
         <div>
-          <span className="inline-flex rounded-full bg-zinc-800 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-300">
+          <span className={`text-xs font-semibold uppercase tracking-[0.2em] ${getLanguageColor(snippet.language)}`}>
             {snippet.language}
           </span>
 

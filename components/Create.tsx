@@ -106,7 +106,7 @@ export function CreateSnippet() {
         />
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex justify-center">
         <button
           type="submit"
           className="rounded-xl bg-violet-600 px-6 py-3 font-medium text-white transition hover:bg-violet-500"

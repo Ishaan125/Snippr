@@ -10,9 +10,9 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-[#111113] bg-gradient-to-b from-[#111113] to-[#0b0b0f]">
-      <section className="mx-auto max-w-7xl px-6 pt-6">
+      <section className="mx-auto max-w-7xl px-6 pt-3">
         <div className="overflow-hidden rounded-[36px] border border-zinc-200 bg-white shadow-xl">
-          <header className="flex items-center justify-between px-10 py-8">
+          <header className="flex items-center justify-between px-10 py-5">
             <Link
               href="/"
               className="text-lg font-bold tracking-[0.35em] text-zinc-900"
@@ -28,7 +28,7 @@ export default async function Home() {
             </Link>
           </header>
 
-          <div className="relative px-10 pb-24 pt-6">
+          <div className="relative px-10 pb-20 pt-2">
             <div className="absolute right-0 top-0 h-full w-80 opacity-40">
               <div className="h-full w-full bg-[radial-gradient(#c4b5fd_1px,transparent_1px)] [background-size:18px_18px]" />
             </div>
@@ -40,7 +40,7 @@ export default async function Home() {
               </span>
 
               <h1 className="mt-8 text-6xl font-bold leading-tight tracking-tight text-zinc-950">
-                <br />Discover the snippets that power your next build.
+                Discover the snippets that power your next build.
               </h1>
 
               <p className="mt-6 max-w-2xl text-xl leading-9 text-zinc-600">

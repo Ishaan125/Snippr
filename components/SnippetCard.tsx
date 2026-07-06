@@ -20,7 +20,7 @@ export async function SnippetCard({ snippet }: { snippet: Snippet }) {
         </div>
 
         {snippet.featured && (
-          <span className="rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs font-medium text-violet-300">
+          <span className="whitespace-nowrap rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs font-medium text-violet-300">
             ★ Popular
           </span>
         )}

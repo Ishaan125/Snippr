@@ -44,8 +44,7 @@ export default async function Home() {
               </h1>
 
               <p className="mt-6 max-w-2xl text-xl leading-9 text-zinc-600">
-                Explore popular code examples, search by language or
-                description, and jump into the snippets that matter most.
+                Browse verified code snippets, search by language or keyword, and find the right solution faster.
               </p>
 
               <div className="mt-10">

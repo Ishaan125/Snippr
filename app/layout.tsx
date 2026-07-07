@@ -17,11 +17,7 @@ export const metadata: Metadata = {
   description: "A clean home for discovering and searching code snippets.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html
       lang="en"

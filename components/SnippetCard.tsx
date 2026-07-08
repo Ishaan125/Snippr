@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Snippet } from "@/types/snippet";
 import { highlightCode } from "@/lib/highlight";
 import { getLanguageColor } from "@/lib/highlight";
+import { CopyButton } from "@/components/CopyButton";
 
 export async function SnippetCard({ snippet }: { snippet: Snippet }) {
   return (
@@ -39,7 +40,7 @@ export async function SnippetCard({ snippet }: { snippet: Snippet }) {
           __html: await highlightCode(snippet.code, snippet.language),
         }}
       />
-      <div className="mt-6 flex items-center justify-between">
+      <div className="mt-6 flex items-center justify-between gap-3">
         <Link
           href={`/snippets/${snippet.slug}`}
           className="inline-flex items-center gap-2 text-sm font-medium
@@ -50,6 +51,7 @@ export async function SnippetCard({ snippet }: { snippet: Snippet }) {
             →
           </span>
         </Link>
+        <CopyButton text={snippet.code} />
       </div>
     </article>
   );

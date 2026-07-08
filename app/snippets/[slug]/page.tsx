@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getSnippetBySlug } from "@/lib/snippets";
 import { highlightCode } from "@/lib/highlight";
 import { getLanguageColor } from "@/lib/highlight";
+import { CopyButton } from "@/components/CopyButton";
 
 export default async function SnippetDetailPage({params,}: {params: Promise<{ slug: string }>;}) {
   const { slug } = await params;
@@ -52,6 +53,9 @@ export default async function SnippetDetailPage({params,}: {params: Promise<{ sl
               __html: await highlightCode(snippet.code, snippet.language),
             }}
           />
+          <div className="mt-6 flex justify-end">
+            <CopyButton text={snippet.code} />
+          </div>
         </article>
       </div>
     </main>

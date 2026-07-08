@@ -42,3 +42,14 @@ export async function getSnippetBySlug(slug: string) {
   const snippets = await getSnippetRecords();
   return snippets.find((snippet) => snippet.slug === slug);
 }
+
+export async function copyToClipboard(text: string) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } 
+  catch (error) {
+    console.error("Failed to copy text to clipboard:", error);
+    return false;
+  }
+}

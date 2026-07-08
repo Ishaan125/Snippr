@@ -26,7 +26,7 @@ export function SearchBar({ initialQuery = "" }: { initialQuery?: string }) {
         className="
           inline-flex h-14 items-center justify-center gap-2 rounded-2xl
           bg-zinc-950 px-6 text-sm font-semibold text-white shadow-md
-          transition-all hover:-translate-y-0.5 hover:bg-black hover:shadow-lg"
+          transition-all hover:-translate-y-0.5 hover:bg-black hover:shadow-lg cursor-pointer"
         >
         Search
         <span>→</span>

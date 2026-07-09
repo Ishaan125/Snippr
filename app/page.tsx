@@ -4,9 +4,13 @@ import { SnippetCard } from "@/components/SnippetCard";
 import { CreateSnippet } from "@/components/Create";
 import { getPopularSnippets } from "@/lib/snippets";
 import { Sparkles } from "lucide-react";
+import { SignInForm } from "@/components/Form";
+import { getCurrentUser } from "@/lib/supabase-auth";
+import { signOut } from "@/app/auth/actions";
 
 export default async function Home() {
   const popularSnippets = await getPopularSnippets();
+  const user = await getCurrentUser();
 
   return (
     <main className="min-h-screen bg-[#111113] bg-gradient-to-b from-[#111113] to-[#0b0b0f]">
@@ -20,12 +24,25 @@ export default async function Home() {
               SNIPPR
             </Link>
 
-            <Link
-              href="/search"
-              className="text-sm font-medium text-zinc-700 transition hover:text-black"
-            >
-              Browse all snippets →
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/search"
+                className="text-sm font-medium text-zinc-700 transition hover:text-black"
+              >
+                Browse all snippets →
+              </Link>
+
+              {user && (
+                <form action={signOut}>
+                  <button
+                    type="submit"
+                    className="rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-100"
+                  >
+                    Sign out
+                  </button>
+                </form>
+              )}
+            </div>
           </header>
 
           <div className="relative px-10 pb-20 pt-2">
@@ -47,9 +64,20 @@ export default async function Home() {
                 Browse verified code snippets, search by language or keyword, and find the right solution faster.
               </p>
 
+              <SignInForm />
+
               <div className="mt-10">
                 <SearchBar />
               </div>
+
+              {user && (
+                <Link
+                  href="/favorites"
+                  className="mt-4 inline-block text-sm font-medium text-zinc-700 transition hover:text-black"
+                >
+                  Go to your favorites →
+                </Link>
+              )}
             </div>
           </div>
         </div>

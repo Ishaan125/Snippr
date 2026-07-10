@@ -1,11 +1,19 @@
 'use server'
 
 import { redirect } from 'next/navigation'
+import { headers } from 'next/headers'
 import { createClient } from '@/lib/supabase-auth'
 
-export async function signIn(prevState: any, formData: FormData) {
+type SignInState = {
+  error?: string
+  success?: string
+} | null
+
+export async function signIn(prevState: SignInState, formData: FormData) {
   const supabase = await createClient()
   const email = formData.get('email') as string
+  const requestHeaders = await headers()
+  const origin = requestHeaders.get('origin') ?? 'http://localhost:3000'
 
   if (!email) {
     return { error: 'Please enter a valid email address.' }
@@ -13,7 +21,7 @@ export async function signIn(prevState: any, formData: FormData) {
 
   const { error } = await supabase.auth.signInWithOtp({
     email,
-    options: { emailRedirectTo: 'http://localhost:3000/auth/confirm?next=/favorites' },
+    options: { emailRedirectTo: `${origin}/auth/confirm?next=/favorites` },
   })
 
   if (error) {

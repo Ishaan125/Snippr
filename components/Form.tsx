@@ -15,17 +15,11 @@ export function SignInForm() {
         
         <div className="flex gap-2">
           <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="name@example.com"
-            required
-            disabled={isPending}
+            id="email" name="email" type="email" placeholder="name@example.com" required disabled={isPending}
             className="flex-1 border p-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
           />
           <button
-            type="submit"
-            disabled={isPending}
+            type="submit" disabled={isPending}
             className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700 transition disabled:opacity-50"
           >
             {isPending ? 'Sending...' : 'Send Link'}

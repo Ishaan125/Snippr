@@ -40,6 +40,7 @@ export default async function Home() {
                   >
                     Sign out
                   </button>
+                  <p> You are signed in as {user.email} </p> 
                 </form>
               )}
             </div>
@@ -70,14 +71,12 @@ export default async function Home() {
                 <SearchBar />
               </div>
 
-              {user && (
-                <Link
-                  href="/favorites"
-                  className="mt-4 inline-block text-sm font-medium text-zinc-700 transition hover:text-black"
-                >
-                  Go to your favorites →
-                </Link>
-              )}
+              <Link
+                href="/favorites"
+                className="mt-4 inline-block text-sm font-medium text-zinc-700 transition hover:text-black"
+              >
+                Go to your favorites →
+              </Link>
             </div>
           </div>
         </div>

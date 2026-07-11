@@ -3,6 +3,7 @@ import type { Snippet } from "@/types/snippet";
 import { highlightCode } from "@/lib/highlight";
 import { getLanguageColor } from "@/lib/highlight";
 import { CopyButton } from "@/components/CopyButton";
+import { FavoriteButton } from "@/components/FavoriteButton";
 
 export async function SnippetCard({ snippet }: { snippet: Snippet }) {
   return (
@@ -51,6 +52,7 @@ export async function SnippetCard({ snippet }: { snippet: Snippet }) {
             →
           </span>
         </Link>
+        <FavoriteButton snippetId={snippet.id} />
         <CopyButton text={snippet.code} />
       </div>
     </article>

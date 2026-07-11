@@ -65,17 +65,16 @@ export default async function Home() {
                 Browse verified code snippets, search by language or keyword, and find the right solution faster.
               </p>
 
-              <SignInForm />
-
-              <div className="mt-10">
+              <div className="mt-10 flex items-center justify-between gap-4">
                 <SearchBar />
+                <SignInForm />
               </div>
 
               <Link
-                href="/favorites"
-                className="mt-4 inline-block text-sm font-medium text-zinc-700 transition hover:text-black"
-              >
-                Go to your favorites →
+                  href="/favorites"
+                  className="mt-4 inline-block text-sm font-medium text-zinc-700 transition hover:text-black"
+                >
+                Access Dashboard →
               </Link>
             </div>
           </div>

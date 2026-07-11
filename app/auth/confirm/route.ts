@@ -4,9 +4,10 @@ import { createServerClient } from '@supabase/ssr'
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code')
+  const tokenHash = requestUrl.searchParams.get('token_hash')
   const next = requestUrl.searchParams.get('next') ?? '/'
 
-  if (!code) {
+  if (!code && !tokenHash) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
@@ -30,7 +31,12 @@ export async function GET(request: NextRequest) {
     },
   )
 
-  const { error } = await supabase.auth.exchangeCodeForSession(code)
+  const { error } = code
+    ? await supabase.auth.exchangeCodeForSession(code)
+    : await supabase.auth.verifyOtp({
+        token_hash: tokenHash!,
+        type: 'email',
+      })
 
   if (error) {
     return NextResponse.redirect(new URL('/', request.url))

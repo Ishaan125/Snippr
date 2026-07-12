@@ -45,7 +45,8 @@ export async function POST(_request: Request, context: RouteContext) {
     }
 
     return NextResponse.json({ success: true, favorited: true })
-  } catch (error) {
+  } 
+  catch (error) {
     return NextResponse.json(
       { success: false, error: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }

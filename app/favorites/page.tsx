@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { SnippetCard } from '@/components/SnippetCard'
 import { getCurrentUser } from '@/lib/supabase-auth'
-import { getSupabaseClient } from '@/lib/supabase'
+import { createClient } from '@/lib/supabase-auth'
 import type { Snippet } from '@/types/snippet'
 
 function mapSnippetRecord(record: Record<string, unknown>): Snippet {
@@ -17,7 +17,7 @@ function mapSnippetRecord(record: Record<string, unknown>): Snippet {
 }
 
 async function getFavoriteSnippets(userId: string): Promise<Snippet[]> {
-    const supabase = getSupabaseClient()
+    const supabase = await createClient()
 
     const { data: favoriteRows, error: favoritesError } = await supabase
         .from('favorites').select('id, snippet_id')
@@ -38,7 +38,7 @@ async function getFavoriteSnippets(userId: string): Promise<Snippet[]> {
     }
 
     const { data: snippetRows, error: snippetsError } = await supabase
-        .from('Snippets').select('*').in('id', orderedSnippetIds)
+        .from('snippets').select('*').in('id', orderedSnippetIds)
 
     if (snippetsError) {
         throw new Error(snippetsError.message)

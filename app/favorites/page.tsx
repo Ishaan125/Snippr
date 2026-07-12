@@ -38,7 +38,7 @@ async function getFavoriteSnippets(userId: string): Promise<Snippet[]> {
     }
 
     const { data: snippetRows, error: snippetsError } = await supabase
-        .from('snippets').select('*').in('id', orderedSnippetIds)
+        .from('Snippets').select('*').in('id', orderedSnippetIds)
 
     if (snippetsError) {
         throw new Error(snippetsError.message)

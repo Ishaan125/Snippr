@@ -13,16 +13,18 @@ export function FavoriteButton({ snippetId }: { snippetId: number }) {
     try {
       const response = await fetch(`/api/favorites/${snippetId}`, {
         method: 'POST',
+        credentials: 'same-origin',
       })
 
-      const payload = await response.json()
+      const payload = await response.json().catch(() => null)
 
       if (!response.ok) {
-        setMessage(payload.error || 'Unable to save favorite.')
+        console.error('Favorite error payload:', payload)
+        setMessage((payload && (payload.error || payload.message)) || 'Unable to save favorite.')
         return
       }
 
-      setMessage(payload.message || 'Saved to favorites.')
+      setMessage((payload && (payload.message || 'Saved to favorites.')) || 'Saved to favorites.')
     } 
     catch (error) {
       setMessage(error instanceof Error ? error.message : 'Unable to save favorite.')

@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { SnippetCard } from '@/components/SnippetCard'
-import { getCurrentUser } from '@/lib/supabase-auth'
-import { createClient } from '@/lib/supabase-auth'
+import { createClient, getCurrentUser } from '@/lib/supabase-auth'
 import type { Snippet } from '@/types/snippet'
 
 function mapSnippetRecord(record: Record<string, unknown>): Snippet {
@@ -122,7 +121,7 @@ export default async function FavoritesPage() {
                 {favoriteSnippets.length > 0 ? (
                     <div className="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
                         {favoriteSnippets.map((snippet) => (
-                            <SnippetCard key={snippet.id} snippet={snippet} />
+                            <SnippetCard key={snippet.id} snippet={snippet} initialFavorited={true} />
                         ))}
                     </div>
                 ) : (

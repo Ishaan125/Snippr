@@ -5,7 +5,7 @@ import { getLanguageColor } from "@/lib/highlight";
 import { CopyButton } from "@/components/CopyButton";
 import { FavoriteButton } from "@/components/FavoriteButton";
 
-export async function SnippetCard({ snippet }: { snippet: Snippet }) {
+export async function SnippetCard({ snippet, initialFavorited = false }: { snippet: Snippet; initialFavorited?: boolean }) {
   return (
     <article
       className="group flex h-full flex-col rounded-3xl border border-zinc-800 bg-zinc-900/80 p-6 
@@ -52,7 +52,7 @@ export async function SnippetCard({ snippet }: { snippet: Snippet }) {
             →
           </span>
         </Link>
-        <FavoriteButton snippetId={snippet.id} />
+        <FavoriteButton snippetId={snippet.id} initialFavorited={initialFavorited} />
         <CopyButton text={snippet.code} />
       </div>
     </article>

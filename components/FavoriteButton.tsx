@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 
-export function FavoriteButton({ snippetId }: { snippetId: number }) {
+export function FavoriteButton({ snippetId, initialFavorited = false }: { snippetId: number; initialFavorited?: boolean }) {
   const [isSaving, setIsSaving] = useState(false)
+  const [isFavorited, setIsFavorited] = useState(initialFavorited)
   const [message, setMessage] = useState<string | null>(null)
 
   const handleFavorite = async () => {
@@ -12,7 +13,7 @@ export function FavoriteButton({ snippetId }: { snippetId: number }) {
 
     try {
       const response = await fetch(`/api/favorites/${snippetId}`, {
-        method: 'POST',
+        method: isFavorited ? 'DELETE' : 'POST',
         credentials: 'same-origin',
       })
 
@@ -24,6 +25,7 @@ export function FavoriteButton({ snippetId }: { snippetId: number }) {
         return
       }
 
+      setIsFavorited(!isFavorited)
       setMessage((payload && (payload.message || 'Saved to favorites.')) || 'Saved to favorites.')
     } 
     catch (error) {
@@ -42,7 +44,7 @@ export function FavoriteButton({ snippetId }: { snippetId: number }) {
         disabled={isSaving}
         className="inline-flex items-center gap-2 text-sm font-medium text-zinc-200 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {isSaving ? 'Saving...' : 'Add to favorites'}
+        {isSaving ? 'Saving...' : isFavorited ? 'Remove favorite' : 'Add to favorites'}
       </button>
 
       {message && <span className="text-xs text-zinc-400">{message}</span>}

@@ -53,3 +53,45 @@ export async function POST(_request: Request, context: RouteContext) {
     )
   }
 }
+
+export async function DELETE(_request: Request, context: RouteContext) {
+  try {
+    const { snippetId: snippetIdParam } = await context.params
+    const snippetId = Number(snippetIdParam)
+
+    if (!Number.isInteger(snippetId) || snippetId <= 0) {
+      return NextResponse.json({ success: false, error: 'Invalid snippet id.' }, { status: 400 })
+    }
+
+    const supabase = await createClient()
+    const { data: userResponse, error: userError } = await supabase.auth.getUser()
+
+    if (userError || !userResponse.user) {
+      return NextResponse.json({ success: false, error: 'You must be signed in to remove favorites.' }, { status: 401 })
+    }
+
+    const userId = userResponse.user.id
+
+    const { error: deleteError, count } = await supabase
+      .from('favorites')
+      .delete({ count: 'exact' })
+      .eq('user_id', userId)
+      .eq('snippet_id', snippetId)
+
+    if (deleteError) {
+      return NextResponse.json({ success: false, error: deleteError.message }, { status: 500 })
+    }
+
+    return NextResponse.json({
+      success: true,
+      favorited: false,
+      message: count && count > 0 ? 'Removed from favorites.' : 'Snippet was not in your favorites.',
+    })
+  }
+  catch (error) {
+    return NextResponse.json(
+      { success: false, error: error instanceof Error ? error.message : 'Unknown error' },
+      { status: 500 },
+    )
+  }
+}

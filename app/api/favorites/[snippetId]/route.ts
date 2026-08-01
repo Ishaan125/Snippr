@@ -88,6 +88,7 @@ export async function DELETE(_request: Request, context: RouteContext) {
       message: count && count > 0 ? 'Removed from favorites.' : 'Snippet was not in your favorites.',
     })
   }
+  
   catch (error) {
     return NextResponse.json(
       { success: false, error: error instanceof Error ? error.message : 'Unknown error' },

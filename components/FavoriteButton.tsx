@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react'
+import { Bookmark, BookmarkCheck } from 'lucide-react'
 
 export function FavoriteButton({ snippetId, initialFavorited = false }: { snippetId: number; initialFavorited?: boolean }) {
   const [isSaving, setIsSaving] = useState(false)
@@ -42,8 +43,9 @@ export function FavoriteButton({ snippetId, initialFavorited = false }: { snippe
       <button
         onClick={handleFavorite}
         disabled={isSaving}
-        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-200 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+        className="cursor-pointer inline-flex items-center gap-2 text-sm font-medium text-zinc-200 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
       >
+        {isSaving ? 'Saving...' : isFavorited ? <Bookmark className="h-4 w-4 fill-current" /> : <Bookmark className="h-4 w-4" />}
         {isSaving ? 'Saving...' : isFavorited ? 'Remove favorite' : 'Add to favorites'}
       </button>
 

@@ -1,11 +1,11 @@
 import { Search } from "lucide-react";
 
-export function SearchBar({ initialQuery = "" }: { initialQuery?: string }) {
+export function SearchBar({ initialQuery = "", className = "" }: { initialQuery?: string; className?: string }) {
   return (
     <form
       action="/search"
       method="get"
-      className="flex w-full max-w-2xl flex-col gap-3 sm:flex-row">
+      className={`flex w-full flex-col gap-3 sm:flex-row ${className}`}>
 
       <div className="relative flex-1">
         <Search className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-zinc-400" />

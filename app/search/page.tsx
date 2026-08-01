@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SearchBar } from "@/components/SearchBar";
 import { SnippetCard } from "@/components/SnippetCard";
 import { searchSnippets } from "@/lib/snippets";
+import { Home, LayoutDashboard, Code2 } from "lucide-react";
 
 export default async function SearchPage({searchParams,}: {searchParams: Promise<{ q?: string }>;}) {
   const { q = "" } = await searchParams;
@@ -20,9 +21,10 @@ export default async function SearchPage({searchParams,}: {searchParams: Promise
 
             <Link
               href="/"
-              className="text-sm font-medium text-zinc-700 transition hover:text-black"
+              className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 transition hover:text-black"
             >
-              ← Back home
+              <Home className="h-4 w-4" />
+              Back home
             </Link>
           </header>
 
@@ -47,6 +49,24 @@ export default async function SearchPage({searchParams,}: {searchParams: Promise
 
               <div className="mt-8">
                 <SearchBar initialQuery={q} />
+              </div>
+
+              <div className="mt-5 flex flex-wrap items-center gap-4">
+                <Link
+                  href="/favorites"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 transition hover:text-black"
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  Access Dashboard →
+                </Link>
+
+                <Link
+                  href="/search"
+                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 px-5 py-3 text-sm font-medium text-zinc-700 transition hover:border-zinc-500 hover:bg-zinc-100"
+                >
+                  <Code2 className="h-4 w-4" />
+                  Browse all snippets →
+                </Link>
               </div>
             </div>
           </div>
@@ -76,8 +96,9 @@ export default async function SearchPage({searchParams,}: {searchParams: Promise
 
             <Link
               href="/"
-              className="mt-8 inline-flex rounded-xl bg-violet-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-violet-500"
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-violet-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-violet-500"
             >
+              <Home className="h-4 w-4" />
               Back home
             </Link>
           </div>

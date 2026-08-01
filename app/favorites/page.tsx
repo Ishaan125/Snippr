@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { SnippetCard } from '@/components/SnippetCard'
 import { createClient, getCurrentUser } from '@/lib/supabase-auth'
 import type { Snippet } from '@/types/snippet'
+import { Home } from 'lucide-react'
 
 function mapSnippetRecord(record: Record<string, unknown>): Snippet {
     return {
@@ -66,7 +67,7 @@ export default async function FavoritesPage() {
                         href="/"
                         className="mt-8 inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200"
                     >
-                        Go back home
+                        Go back home <Home className="ml-2 h-4 w-4" />
                     </Link>
                 </div>
             </main>
@@ -91,7 +92,7 @@ export default async function FavoritesPage() {
                         href="/"
                         className="mt-8 inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200"
                     >
-                        Go back home
+                        Go back home <Home className="ml-2 h-4 w-4" />
                     </Link>
                 </div>
             </main>

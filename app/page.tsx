@@ -3,7 +3,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { SnippetCard } from "@/components/SnippetCard";
 import { CreateSnippet } from "@/components/Create";
 import { getPopularSnippets } from "@/lib/snippets";
-import { Sparkles } from "lucide-react";
+import { Sparkles, LayoutDashboard, Code2 } from "lucide-react";
 import { SignInForm } from "@/components/Form";
 import { getCurrentUser } from "@/lib/supabase-auth";
 import { signOut } from "@/app/auth/actions";
@@ -16,7 +16,7 @@ export default async function Home() {
     <main className="min-h-screen bg-[#111113] bg-gradient-to-b from-[#111113] to-[#0b0b0f]">
       <section className="mx-auto max-w-7xl px-6 pt-3">
         <div className="overflow-hidden rounded-[36px] border border-zinc-200 bg-white shadow-xl">
-          <header className="flex items-center justify-between px-10 py-5">
+          <header className="flex items-center justify-between px-8 py-4">
             <Link
               href="/"
               className="text-lg font-bold tracking-[0.35em] text-zinc-900"
@@ -27,8 +27,9 @@ export default async function Home() {
             <div className="flex items-center gap-4">
               <Link
                 href="/search"
-                className="text-sm font-medium text-zinc-700 transition hover:text-black"
+                className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 transition hover:text-black"
               >
+                <Code2 className="h-4 w-4" />
                 Browse all snippets →
               </Link>
 
@@ -40,42 +41,43 @@ export default async function Home() {
                   >
                     Sign out
                   </button>
-                  <p> You are signed in as {user.email} </p> 
+                  <p className="text-sm text-zinc-950">
+                    You are signed in as {user.email}
+                  </p>
                 </form>
               )}
             </div>
           </header>
 
-          <div className="relative px-10 pb-20 pt-2">
+          <div className="relative px-8 pb-14 pt-1">
             <div className="absolute right-0 top-0 h-full w-80 opacity-40">
               <div className="h-full w-full bg-[radial-gradient(#c4b5fd_1px,transparent_1px)] [background-size:18px_18px]" />
             </div>
 
-            <div className="relative max-w-3xl">
+            <div className="relative w-full">
               <span className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-violet-50 px-4 py-1.5 text-sm font-semibold text-violet-800">
                 <Sparkles className="h-3.5 w-3.5 text-violet-600" />
                 <span className="text-violet-800">Find. Learn. Build.</span>
               </span>
 
-              <h1 className="mt-8 text-6xl font-bold leading-tight tracking-tight text-zinc-950">
-                Discover the snippets that power your next build.
+              <h1 className="mt-6 text-5xl font-bold leading-tight tracking-tight text-zinc-950">
+                Discover the snippets that <br /> power your next build.
               </h1>
 
-              <p className="mt-6 max-w-2xl text-xl leading-9 text-zinc-600">
-                Browse verified code snippets, search by language or keyword, and find the right solution faster.
-              </p>
-
-              <div className="mt-10 flex items-center justify-between gap-4">
-                <SearchBar />
-                <SignInForm />
+              <div className="mt-7">
+                <SearchBar className="h-full max-w-2xl" />
               </div>
 
-              <Link
+              <div className="mt-4 flex w-full flex-col items-start gap-4 md:flex-row md:items-center md:justify-start md:gap-20">
+                <SignInForm className="w-full md:w-[440px]" />
+                <Link
                   href="/favorites"
-                  className="mt-4 inline-block text-sm font-medium text-zinc-700 transition hover:text-black"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 transition hover:text-black md:pl-1"
                 >
-                Access Dashboard →
-              </Link>
+                  <LayoutDashboard className="h-4 w-4" />
+                  Access Dashboard →
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -94,8 +96,9 @@ export default async function Home() {
 
           <Link
             href="/search"
-            className="rounded-xl border border-zinc-700 px-5 py-3 text-sm font-medium text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800"
+            className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 px-5 py-3 text-sm font-medium text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800"
           >
+            <Code2 className="h-4 w-4" />
             Browse all snippets →
           </Link>
         </div>

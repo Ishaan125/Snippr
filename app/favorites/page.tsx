@@ -115,7 +115,7 @@ export default async function FavoritesPage() {
                         href="/search"
                         className="inline-flex rounded-full border border-zinc-700 px-5 py-3 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-800"
                     >
-                        Browse more snippets →
+                        Back Home <Home className="ml-2 h-4 w-4" />
                     </Link>
                 </div>
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SearchBar } from "@/components/SearchBar";
 import { SnippetCard } from "@/components/SnippetCard";
 import { searchSnippets } from "@/lib/snippets";
+import { CreateSnippet } from "@/components/Create";
 import { Home, LayoutDashboard, Code2 } from "lucide-react";
 
 export default async function SearchPage({searchParams,}: {searchParams: Promise<{ q?: string }>;}) {
@@ -62,7 +63,7 @@ export default async function SearchPage({searchParams,}: {searchParams: Promise
 
                 <Link
                   href="/search"
-                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 px-5 py-3 text-sm font-medium text-zinc-700 transition hover:border-zinc-500 hover:bg-zinc-100"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 transition hover:text-black"
                 >
                   <Code2 className="h-4 w-4" />
                   Browse all snippets →
@@ -103,6 +104,26 @@ export default async function SearchPage({searchParams,}: {searchParams: Promise
             </Link>
           </div>
         )}
+
+      <div className="mt-16 rounded-3xl border border-zinc-800 bg-zinc-900 p-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-5">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-zinc-800 text-2xl">
+              ✨
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-white">
+                Have a useful snippet?
+              </h3>
+              <p className="mt-1 text-zinc-400">
+                Share it with the community and help others ship faster.
+              </p>
+            </div>
+          </div>
+
+          <CreateSnippet />
+        </div>
+      </div>
       </section>
     </main>
   );

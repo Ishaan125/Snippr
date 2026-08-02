@@ -45,7 +45,7 @@ export function FavoriteButton({ snippetId, initialFavorited = false }: { snippe
         disabled={isSaving}
         className="cursor-pointer inline-flex items-center gap-2 text-sm font-medium text-zinc-200 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {isSaving ? 'Saving...' : isFavorited ? <Bookmark className="h-4 w-4 fill-current" /> : <Bookmark className="h-4 w-4" />}
+        {isSaving ? 'Saving...' : isFavorited ? <Bookmark className="h-4 w-4" /> : <Bookmark className="h-4 w-4 fill-current" />}
         {isSaving ? 'Saving...' : isFavorited ? 'Remove favorite' : 'Add to favorites'}
       </button>
 

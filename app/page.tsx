@@ -3,7 +3,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { SnippetCard } from "@/components/SnippetCard";
 import { CreateSnippet } from "@/components/Create";
 import { getPopularSnippets } from "@/lib/snippets";
-import { Sparkles, LayoutDashboard, Code2 } from "lucide-react";
+import { Sparkles, LayoutDashboard, Code2, LogOut } from "lucide-react";
 import { SignInForm } from "@/components/Form";
 import { getCurrentUser } from "@/lib/supabase-auth";
 import { signOut } from "@/app/auth/actions";
@@ -37,9 +37,10 @@ export default async function Home() {
                 <form action={signOut}>
                   <button
                     type="submit"
-                    className="rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-100 cursor-pointer"
+                    className="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-100 cursor-pointer"
                   >
                     Sign out
+                    <LogOut className="ml-2 h-4 w-4" />
                   </button>
                   <p className="text-sm text-zinc-950">
                     You are signed in as {user.email}

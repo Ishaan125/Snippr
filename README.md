@@ -70,3 +70,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 - Snippets are rendered with syntax highlighting using Shiki.
 - New submissions are marked for review before being published.
+
+## gitdiagram
+
+<img width="4184" height="7648" alt="diagram" src="https://github.com/user-attachments/assets/944fa98a-6288-4d8c-9ac1-481f9f230bac" />
+
